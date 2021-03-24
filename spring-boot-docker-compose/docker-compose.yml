@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    container_name: app
+    environment:
+      - TZ=Asia/Shanghai
+    restart: always
+    depends_on:
+      - mysql
+      - redis
+      - nginx
+    networks:
+      - project
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=database
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/conf/my.cnf:/etc/mysql/my.cnf
+    restart: always
+    networks:
+      - project
+
+  redis:
+    image: redis
+    container_name: redis
+    volumes:
+      - ./redis/data:/data
+    restart: always
+    networks:
+      - project
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/static/:/app/static/
+    ports:
+      - 80:80
+    restart: always
+    networks:
+      - project
+
+networks:
+  project:
