@@ -1,5 +1,5 @@
 CREATE TABLE `user`(
-    `id` INT(11) NOT NULL PRIMARY KEY PRIMARY KEY COMMENT 'id',
+    `id` INT(11) NOT NULL PRIMARY KEY COMMENT 'id',
     `username` VARCHAR(50) NOT NULL,
     `password` VARCHAR(50) NOT NULL,
     `enabled` BOOLEAN NOT NULL COMMENT '用户是否可用',
