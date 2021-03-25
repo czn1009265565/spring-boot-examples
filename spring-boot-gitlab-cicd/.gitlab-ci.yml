@@ -1,0 +1,33 @@
+stages:
+  - build
+  - deploy
+
+maven-build:
+  stage: build
+  script:
+    - mvn clean package -DskipTests
+  artifacts:
+    paths:
+      - target/*.jar
+    expire_in: 30 mins
+  only:
+    - develop
+    - /^feature\/.*/
+    - /^hotfix\/.*/
+    - /^release\/.*/
+  tags:
+    - MAVEN_RUNNER
+
+docker-deploy:
+  stage: deploy
+  script:
+    - docker build -t project .
+    - docker rm -f project || true
+    - docker run -d --name project -p 8080:8080 project
+  only:
+    - develop
+    - /^feature\/.*/
+    - /^hotfix\/.*/
+    - /^release\/.*
+  tags:
+    - MAVEN_RUNNER
