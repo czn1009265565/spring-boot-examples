@@ -19,14 +19,14 @@
    ```
    spring:
       datasource:
-      url: jdbc:mysql://localhost:3306/database?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true
-      username: root
-      password: root
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      
+         url: jdbc:mysql://localhost:3306/database?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true
+         username: root
+         password: root
+         driver-class-name: com.mysql.cj.jdbc.Driver
+   
    mybatis:
       configuration:
-      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+         log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
       mapper-locations: classpath*:mapper/*.xml
    ```
    Main
