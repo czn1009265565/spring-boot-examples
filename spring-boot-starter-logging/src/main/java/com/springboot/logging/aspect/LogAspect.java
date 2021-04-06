@@ -6,7 +6,6 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Slf4j
 @Aspect
-@Component
 public class LogAspect {
     @Pointcut("@within(com.springboot.logging.annotation.SysLog)")
     public void pointCut() {

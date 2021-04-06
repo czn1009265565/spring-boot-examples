@@ -33,6 +33,10 @@ public class LogUtils {
      */
     public static String obtainUsername(){
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null) {
+            return "";
+        }
+
         if (authentication.getPrincipal() instanceof UserDetails) {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             return userDetails.getUsername();
