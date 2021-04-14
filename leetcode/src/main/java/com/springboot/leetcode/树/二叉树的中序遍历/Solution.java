@@ -11,8 +11,13 @@ import java.util.List;
  */
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
+
         List<Integer> list = new ArrayList<>();
-        inorder(list, root);
+//        递归
+//        inorder(list, root);
+
+//        非递归
+        nonInorder(list, root);
         return list;
     }
 
@@ -36,19 +41,29 @@ class Solution {
      * @param node tree node
      * @return list
      */
-    private List<Integer> nonInorder(List<Integer> arr, TreeNode node) {
+    private void nonInorder(List<Integer> arr, TreeNode node) {
         if (node == null) {
-            return arr;
+            return;
         }
         Deque<TreeNode> treeDeque = new LinkedList<>();
-        Deque<Integer> valueDeque = new LinkedList<>();
-        treeDeque.push(node);
+        push(treeDeque, node);
 
-        while (node.left != null) {
-            treeDeque.push(node.left);
-            node = node.left;
+        while (!treeDeque.isEmpty()) {
+            TreeNode treeNode = treeDeque.pop();
+            arr.add(treeNode.val);
+            if (treeNode.right != null) {
+                push(treeDeque, treeNode.right);
+            }
         }
+    }
 
+    private void push(Deque<TreeNode> deque, TreeNode treeNode) {
+        if (treeNode == null) return;
+        deque.push(treeNode);
+        while (treeNode.left != null) {
+            deque.push(treeNode.left);
+            treeNode = treeNode.left;
+        }
     }
 
     public static void main(String[] args) {
