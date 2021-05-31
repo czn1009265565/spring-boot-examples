@@ -1,0 +1,4 @@
+singleServerConfig:
+  address: "redis://172.30.255.171:6379"
+
+# 更多配置查看  org.redisson.config.SingleServerConfig 源码
