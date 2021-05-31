@@ -1,0 +1,19 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: business
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: business
+
+seata:
+  service:
+    vgroup-mapping:
+      business: default
+    grouplist:
+      default: 172.30.255.171:8091
+
+
